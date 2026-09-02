@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 import seaborn as sns
 
 
@@ -347,5 +348,62 @@ def plot_correlation_heatmap(df: pd.DataFrame) -> None:
     )
 
     plt.title("Correlation Matrix")
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_actual_vs_predicted(
+    y_true: pd.Series,
+    y_pred: np.ndarray,
+    title: str = "Actual vs Predicted",
+) -> None:
+    """
+    Plot actual target values against model predictions.
+    """
+    plt.figure(figsize=(8, 8))
+
+    sns.scatterplot(
+        x=y_true,
+        y=y_pred,
+        alpha=0.4,
+    )
+
+    min_value = min(y_true.min(), y_pred.min())
+    max_value = max(y_true.max(), y_pred.max())
+
+    plt.plot(
+        [min_value, max_value],
+        [min_value, max_value],
+        linestyle="--",
+    )
+
+    plt.title(title)
+    plt.xlabel("Actual Demand")
+    plt.ylabel("Predicted Demand")
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_feature_importance(
+    importance_df: pd.DataFrame,
+    top_n: int = 15,
+    title: str = "Feature Importance",
+) -> None:
+    """
+    Plot the most important features from a tree-based model.
+    """
+    top_features = importance_df.head(top_n)
+
+    plt.figure(figsize=(10, 7))
+
+    sns.barplot(
+        data=top_features,
+        x="Importance",
+        y="Feature",
+    )
+
+    plt.title(title)
+    plt.xlabel("Importance")
+    plt.ylabel("Feature")
     plt.tight_layout()
     plt.show()
