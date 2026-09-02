@@ -1,0 +1,77 @@
+# =========================
+# Python
+# =========================
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+
+# =========================
+# Jupyter Notebook
+# =========================
+
+.ipynb_checkpoints/
+
+
+# =========================
+# IDE / Editor
+# =========================
+
+.vscode/
+.idea/
+
+# =========================
+# OS
+# =========================
+
+.DS_Store
+Thumbs.db
+
+
+# =========================
+# Python tools
+# =========================
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+
+# =========================
+# Project data
+# =========================
+
+# Processed/generated data
+data/processed/*
+
+# Keep the directory itself
+!data/processed/.gitkeep
+
+
+# =========================
+# Generated figures
+# =========================
+
+# Generated plots are not ignored because
+# final figures may be committed to the repository.
+
+
+# =========================
+# Environment / secrets
+# =========================
+
+.env
+.env.*
+!.env.example
