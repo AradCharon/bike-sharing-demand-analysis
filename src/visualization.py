@@ -1,12 +1,43 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-def plot_target_distribution(df: pd.DataFrame) -> None:
+def _save_figure(
+    save_path: str | Path | None,
+) -> None:
+    """
+    Save the current Matplotlib figure if a path is provided.
+
+    Args:
+        save_path:
+            Destination path for the figure.
+    """
+    if save_path is None:
+        return
+
+    save_path = Path(save_path)
+    save_path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    plt.savefig(
+        save_path,
+        dpi=300,
+        bbox_inches="tight",
+    )
+
+
+def plot_target_distribution(
+    df: pd.DataFrame,
+    save_path: str | Path | None = None,
+) -> None:
     """
     Plot the distribution of total hourly bike rentals.
     """
@@ -23,10 +54,17 @@ def plot_target_distribution(df: pd.DataFrame) -> None:
     plt.xlabel("Total Rentals (`cnt`)")
     plt.ylabel("Frequency")
     plt.tight_layout()
+
+    _save_figure(save_path)
+
     plt.show()
+    plt.close()
 
 
-def plot_hourly_demand(df: pd.DataFrame) -> None:
+def plot_hourly_demand(
+    df: pd.DataFrame,
+    save_path: str | Path | None = None,
+) -> None:
     """
     Plot average bike rental demand by hour of day.
     """
@@ -49,10 +87,17 @@ def plot_hourly_demand(df: pd.DataFrame) -> None:
     plt.ylabel("Average Rentals")
     plt.xticks(range(24))
     plt.tight_layout()
+
+    _save_figure(save_path)
+
     plt.show()
+    plt.close()
 
 
-def plot_weekday_demand(df: pd.DataFrame) -> None:
+def plot_weekday_demand(
+    df: pd.DataFrame,
+    save_path: str | Path | None = None,
+) -> None:
     """
     Plot average bike rental demand by weekday.
     """
@@ -73,10 +118,17 @@ def plot_weekday_demand(df: pd.DataFrame) -> None:
     plt.xlabel("Weekday")
     plt.ylabel("Average Rentals")
     plt.tight_layout()
+
+    _save_figure(save_path)
+
     plt.show()
+    plt.close()
 
 
-def plot_monthly_demand(df: pd.DataFrame) -> None:
+def plot_monthly_demand(
+    df: pd.DataFrame,
+    save_path: str | Path | None = None,
+) -> None:
     """
     Plot average bike rental demand by month.
     """
@@ -99,10 +151,17 @@ def plot_monthly_demand(df: pd.DataFrame) -> None:
     plt.ylabel("Average Rentals")
     plt.xticks(range(1, 13))
     plt.tight_layout()
+
+    _save_figure(save_path)
+
     plt.show()
+    plt.close()
 
 
-def plot_yearly_demand(df: pd.DataFrame) -> None:
+def plot_yearly_demand(
+    df: pd.DataFrame,
+    save_path: str | Path | None = None,
+) -> None:
     """
     Plot average bike rental demand by year.
     """
@@ -128,10 +187,17 @@ def plot_yearly_demand(df: pd.DataFrame) -> None:
     plt.xlabel("Year")
     plt.ylabel("Average Rentals")
     plt.tight_layout()
+
+    _save_figure(save_path)
+
     plt.show()
+    plt.close()
 
 
-def plot_workingday_hourly_demand(df: pd.DataFrame) -> None:
+def plot_workingday_hourly_demand(
+    df: pd.DataFrame,
+    save_path: str | Path | None = None,
+) -> None:
     """
     Compare average hourly demand between working and non-working days.
     """
@@ -169,10 +235,17 @@ def plot_workingday_hourly_demand(df: pd.DataFrame) -> None:
     plt.xticks(range(24))
     plt.legend(title="Day Type")
     plt.tight_layout()
+
+    _save_figure(save_path)
+
     plt.show()
+    plt.close()
 
 
-def plot_seasonal_demand(df: pd.DataFrame) -> None:
+def plot_seasonal_demand(
+    df: pd.DataFrame,
+    save_path: str | Path | None = None,
+) -> None:
     """
     Plot average bike rental demand by season.
     """
@@ -202,10 +275,17 @@ def plot_seasonal_demand(df: pd.DataFrame) -> None:
     plt.xlabel("Season")
     plt.ylabel("Average Rentals")
     plt.tight_layout()
+
+    _save_figure(save_path)
+
     plt.show()
+    plt.close()
 
 
-def plot_weather_demand(df: pd.DataFrame) -> None:
+def plot_weather_demand(
+    df: pd.DataFrame,
+    save_path: str | Path | None = None,
+) -> None:
     """
     Plot average bike rental demand by weather situation.
     """
@@ -226,10 +306,17 @@ def plot_weather_demand(df: pd.DataFrame) -> None:
     plt.xlabel("Weather Situation")
     plt.ylabel("Average Rentals")
     plt.tight_layout()
+
+    _save_figure(save_path)
+
     plt.show()
+    plt.close()
 
 
-def plot_temperature_vs_demand(df: pd.DataFrame) -> None:
+def plot_temperature_vs_demand(
+    df: pd.DataFrame,
+    save_path: str | Path | None = None,
+) -> None:
     """
     Plot the relationship between temperature and demand.
     """
@@ -251,10 +338,17 @@ def plot_temperature_vs_demand(df: pd.DataFrame) -> None:
     plt.xlabel("Normalized Temperature")
     plt.ylabel("Total Rentals")
     plt.tight_layout()
+
+    _save_figure(save_path)
+
     plt.show()
+    plt.close()
 
 
-def plot_humidity_vs_demand(df: pd.DataFrame) -> None:
+def plot_humidity_vs_demand(
+    df: pd.DataFrame,
+    save_path: str | Path | None = None,
+) -> None:
     """
     Plot the relationship between humidity and demand.
     """
@@ -276,10 +370,17 @@ def plot_humidity_vs_demand(df: pd.DataFrame) -> None:
     plt.xlabel("Normalized Humidity")
     plt.ylabel("Total Rentals")
     plt.tight_layout()
+
+    _save_figure(save_path)
+
     plt.show()
+    plt.close()
 
 
-def plot_user_type_demand(df: pd.DataFrame) -> None:
+def plot_user_type_demand(
+    df: pd.DataFrame,
+    save_path: str | Path | None = None,
+) -> None:
     """
     Compare average hourly demand for casual and registered users.
     """
@@ -312,10 +413,17 @@ def plot_user_type_demand(df: pd.DataFrame) -> None:
     plt.xticks(range(24))
     plt.legend(title="User Type")
     plt.tight_layout()
+
+    _save_figure(save_path)
+
     plt.show()
+    plt.close()
 
 
-def plot_correlation_heatmap(df: pd.DataFrame) -> None:
+def plot_correlation_heatmap(
+    df: pd.DataFrame,
+    save_path: str | Path | None = None,
+) -> None:
     """
     Plot a correlation heatmap for selected numerical variables.
     """
@@ -349,13 +457,18 @@ def plot_correlation_heatmap(df: pd.DataFrame) -> None:
 
     plt.title("Correlation Matrix")
     plt.tight_layout()
+
+    _save_figure(save_path)
+
     plt.show()
+    plt.close()
 
 
 def plot_actual_vs_predicted(
     y_true: pd.Series,
     y_pred: np.ndarray,
     title: str = "Actual vs Predicted",
+    save_path: str | Path | None = None,
 ) -> None:
     """
     Plot actual target values against model predictions.
@@ -368,8 +481,15 @@ def plot_actual_vs_predicted(
         alpha=0.4,
     )
 
-    min_value = min(y_true.min(), y_pred.min())
-    max_value = max(y_true.max(), y_pred.max())
+    min_value = min(
+        y_true.min(),
+        y_pred.min(),
+    )
+
+    max_value = max(
+        y_true.max(),
+        y_pred.max(),
+    )
 
     plt.plot(
         [min_value, max_value],
@@ -381,13 +501,18 @@ def plot_actual_vs_predicted(
     plt.xlabel("Actual Demand")
     plt.ylabel("Predicted Demand")
     plt.tight_layout()
+
+    _save_figure(save_path)
+
     plt.show()
+    plt.close()
 
 
 def plot_feature_importance(
     importance_df: pd.DataFrame,
     top_n: int = 15,
     title: str = "Feature Importance",
+    save_path: str | Path | None = None,
 ) -> None:
     """
     Plot the most important features from a tree-based model.
@@ -406,4 +531,8 @@ def plot_feature_importance(
     plt.xlabel("Importance")
     plt.ylabel("Feature")
     plt.tight_layout()
+
+    _save_figure(save_path)
+
     plt.show()
+    plt.close()
